@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { Upload, Wand2 } from "lucide-react"
-import { MusicIllustration } from "../components/MusicIllustration"
-import { useNavigate } from "react-router-dom"
-import axiosInstance from "../axiosInstance"  // Correct import for axiosInstance
-import "./Home.css"
+import React, { useState, useEffect } from "react";
+import { Upload, Wand2 } from "lucide-react";
+import { MusicIllustration } from "../components/MusicIllustration";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../axiosInstance"; // Correct import for axiosInstance
+import "./Home.css";
 
 const genres = [
   "Acoustic",
@@ -22,44 +22,44 @@ const genres = [
   "Indie Rock",
   "Metal",
   "RnB",
-]
+];
 
 export default function Home() {
-  const [file, setFile] = useState(null)
-  const [genre, setGenre] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-  const [error, setError] = useState("")  // State to store error message
-  const navigate = useNavigate()  // For redirecting to Dashboard after success
+  const [file, setFile] = useState(null);
+  const [genre, setGenre] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [error, setError] = useState(""); // State to store error message
+  const navigate = useNavigate(); // For redirecting to Dashboard after success
 
   useEffect(() => {
-    setIsVisible(true)
-  }, [])
+    setIsVisible(true);
+  }, []);
 
   const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0]
-    const MAX_FILE_SIZE = 3 * 1024 * 1024 // 3MB in bytes
+    const selectedFile = e.target.files[0];
+    const MAX_FILE_SIZE = 3 * 1024 * 1024; // 3MB in bytes
 
     if (selectedFile && selectedFile.size > MAX_FILE_SIZE) {
-      alert("File size exceeds 3MB limit")
-      e.target.value = "" // Reset input
-      setFile(null)
-      return
+      alert("File size exceeds 3MB limit");
+      e.target.value = ""; // Reset input
+      setFile(null);
+      return;
     }
 
-    setFile(selectedFile)
-  }
+    setFile(selectedFile);
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (!file || !genre) return
+    e.preventDefault();
+    if (!file || !genre) return;
 
-    setIsLoading(true)
-    setError("") // Clear any previous error message
+    setIsLoading(true);
+    setError(""); // Clear any previous error message
 
-    const formData = new FormData()
-    formData.append("file", file)
-    formData.append("track_genre", genre)
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("track_genre", genre);
 
     try {
       // Use axiosInstance to send the POST request to the /predict endpoint
@@ -67,11 +67,21 @@ export default function Home() {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      })
+      });
 
-      console.log("Response from backend:", response.data)
-      // Assuming the response contains the attributes
-      const { predicted_popularity, acousticness, danceability, energy, instrumentalness, song_url } = response.data
+      console.log("Response from backend:", response.data);
+      // Destructure the necessary attributes from the response
+      const {
+        predicted_popularity,
+        acousticness,
+        danceability,
+        energy,
+        liveness,
+        instrumentalness,
+        song_url,
+        metadata,
+        audio_features,
+      } = response.data;
 
       // Redirect to the Dashboard page and pass the attributes
       navigate("/dashboard", {
@@ -80,18 +90,26 @@ export default function Home() {
           acousticness,
           danceability,
           energy,
+          liveness,
           instrumentalness,
-          song_url
+          song_url,
+          metadata,
+          audio_features,
         },
-      })
+      });
 
+      // console.log("danceability from backend:", response.datadanceability);
+      // console.log("acousticness from backend:", response.dataacousticness);
+      // console.log("energy from backend:", response.dataenergy);
+      // console.log("liveness from backend:", response.dataliveness);
+      // console.log("instrumentalness from backend:", response.datainstrumentalness);
     } catch (error) {
-      console.error("Error during prediction:", error)
-      setError("An error occurred. Please try again.") // Set error message state
+      console.error("Error during prediction:", error);
+      setError("An error occurred. Please try again."); // Set error message state
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="home-container">
@@ -113,7 +131,7 @@ export default function Home() {
                 />
                 <label htmlFor="music-file" className="file-label">
                   <Upload size={20} />
-                  <span>{file ? file.name : "  Choose a file"}</span>
+                  <span>{file ? file.name : "Choose a file"}</span>
                 </label>
               </div>
               <p className="file-hint">Maximum file size: 3MB</p>
@@ -150,5 +168,5 @@ export default function Home() {
         <MusicIllustration />
       </div>
     </div>
-  )
+  );
 }

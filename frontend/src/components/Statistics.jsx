@@ -2,16 +2,17 @@ import React from "react"
 import { AlertTriangle } from "lucide-react"
 import "./Statistics.css"
 
-export function Statistics() {
-  const predictionValue = 60  
+export function Statistics({ popularity }) {
+  // Scale up and round the popularity value
+  const scaledPopularity = Math.min(Math.round((popularity || 0) * 2), 100) // Scale up, cap at 100%
 
+  // Get color based on popularity
   const getColor = (value) => {
     if (value <= 30) return "#F87171" // Red
     if (value <= 50) return "#FBBF24" // Yellow
     return "#10B981" // Teal
   }
-
-  const color = getColor(predictionValue)
+  const color = getColor(scaledPopularity)
 
   return (
     <div className="statistics-container">
@@ -27,7 +28,7 @@ export function Statistics() {
               r="54"
               strokeWidth="12"
               style={{
-                "--progress": predictionValue,
+                "--progress": scaledPopularity,
                 "--progress-color": color,
               }}
             />
@@ -35,18 +36,12 @@ export function Statistics() {
           <div className="progress-content">
             <AlertTriangle className="status-icon" size={24} style={{ color }} />
             <span className="prediction-value" style={{ color }}>
-              {predictionValue}%
+              {scaledPopularity}%
             </span>
             <span className="prediction-label">Predicted Success Rate</span>
           </div>
-        </div>
-        <div className="indicator-dots">
-          <span className="dot low" />
-          <span className="dot medium" />
-          <span className="dot high" />
         </div>
       </div>
     </div>
   )
 }
-
