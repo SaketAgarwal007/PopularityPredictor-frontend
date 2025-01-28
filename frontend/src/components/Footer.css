@@ -8,21 +8,20 @@
 .footer-content {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .footer-section h3 {
   color: var(--text);
   font-size: 1.125rem;
   margin-bottom: 1rem;
-  margin-left:7rem;
 }
 
 .footer-section p {
   color: var(--text-muted);
-  margin-left:7rem;
 }
-
-
 
 .footer-nav {
   display: flex;
@@ -34,7 +33,6 @@
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.3s ease;
-  margin-left:7rem;
 }
 
 .footer-nav a:hover {
@@ -44,7 +42,6 @@
 .social-links {
   display: flex;
   gap: 1rem;
-  margin-left:7rem;
 }
 
 .social-links a {
@@ -67,6 +64,7 @@
 @media (max-width: 768px) {
   .footer-content {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 }
 

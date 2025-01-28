@@ -1,21 +1,128 @@
-.illustration-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+.music-illustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  perspective: 1000px;
+}
+
+.music-illustration svg {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.2));
+  transform-style: preserve-3d;
+  animation: floatCassette 6s ease-in-out infinite;
+}
+
+.cassette-body {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.cassette-text {
+  font-family: "Press Start 2P", cursive;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  filter: drop-shadow(0 0 2px rgba(124, 58, 237, 0.5));
+}
+
+/* Rotating spools animation */
+.left-spool {
+  transform-origin: 120px 170px;
+  animation: rotateSpool 4s linear infinite;
+}
+
+.right-spool {
+  transform-origin: 280px 170px;
+  animation: rotateSpool 4s linear infinite reverse;
+}
+
+/* Tape path animation */
+.tape-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawTape 4s linear infinite;
+}
+
+/* Label area pulsing */
+.label-area {
+  animation: pulseLabelArea 4s ease-in-out infinite;
+}
+
+/* Small holes blinking */
+circle[r="5"] {
+  animation: blinkHoles 2s ease-in-out infinite;
+}
+
+@keyframes floatCassette {
+  0%,
+  100% {
+    transform: translateY(0) rotate3d(1, 0, 1, 0deg);
   }
-  
-  .music-illustration {
-    max-width: 450px;
-    margin-left: 10rem;
+  50% {
+    transform: translateY(-20px) rotate3d(1, 0, 1, 5deg);
+  }
+}
+
+@keyframes rotateSpool {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes drawTape {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@keyframes pulseLabelArea {
+  0%,
+  100% {
+    fill-opacity: 0.1;
+  }
+  50% {
+    fill-opacity: 0.2;
+  }
+}
+
+@keyframes blinkHoles {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .music-illustration svg {
+    width: 350px;
     height: auto;
-    filter: drop-shadow(0 8px 24px rgba(124, 58, 237, 0.2));
   }
-  
-  @media (max-width: 768px) {
-    .music-illustration {
-      max-width: 300px;
-    }
+}
+
+@media (max-width: 1024px) {
+  .music-illustration svg {
+    width: 300px;
+    height: auto;
   }
-  
-  
+  .music-illustration {
+    display: none;
+  }
+}
+
