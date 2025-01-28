@@ -1,0 +1,72 @@
+.features-container {
+    background: rgba(17, 24, 39, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 2rem;
+    height: 100%;
+  }
+  
+  .features-container h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--text);
+  }
+  
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .feature-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .feature-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .feature-name {
+    font-size: 1rem;
+    color: var(--text);
+  }
+  
+  .feature-value {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+  
+  .feature-line-container {
+    height: 2px;
+    background: rgba(124, 58, 237, 0.1);
+    border-radius: 1px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .feature-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--progress);
+    background: var(--color);
+    border-radius: 1px;
+    animation: growLine 1s ease-out;
+  }
+  
+  @keyframes growLine {
+    from {
+      width: 0;
+    }
+    to {
+      width: var(--progress);
+    }
+  }
+  
+  
