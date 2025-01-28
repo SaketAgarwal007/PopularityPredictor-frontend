@@ -1,12 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-// vite.config.js
-export default {
-  server: {
-    port: 8080,  // Render expects port 8080
-    host: '0.0.0.0',  // This ensures that it listens on all network interfaces
-  },
-  preview: {
-    allowedHosts: ['hitpredict.onrender.com'],  // Add Render domain to allowed hosts
-  },
-}
+const port = process.env.PORT || 5173;
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})
