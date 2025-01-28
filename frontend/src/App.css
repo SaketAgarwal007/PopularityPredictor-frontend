@@ -1,42 +1,189 @@
-#root {
-  max-width: 1280px;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary: #7c3aed;
+  --primary-dark: #6d28d9;
+  --background: #0b1121;
+  --card-bg: #111827;
+  --text: #f8fafc;
+  --text-muted: #a0aec0;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.form-section {
+  flex: 1;
+  max-width: 600px;
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 2rem;
-  text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.prediction-image {
+  max-width: 400px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.3));
+  transform-origin: center;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (max-width: 1024px) {
+  .content-wrapper {
+    flex-direction: column;
   }
+
+  .form-section,
+  .image-section {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .image-section {
+    margin-top: 2rem;
+  }
+  .prediction-image {
+    max-width: 300px;
+    margin-top: 2rem;
+  }
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+.form-container {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 3rem;
+  width: 100%;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.upload-container {
+  background: rgba(124, 58, 237, 0.1);
+  border: 2px dashed var(--primary);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.upload-container:hover {
+  border-color: var(--primary-dark);
+  background: rgba(124, 58, 237, 0.15);
+}
+
+.upload-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-input {
+  width: 100%;
+  padding: 1rem;
+  padding-right: 2.5rem;
+  background: rgba(124, 58, 237, 0.2);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  color: #e2e8f0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+}
+
+.select-input:hover,
+.select-input:focus {
+  border-color: var(--primary-dark);
+  background: rgba(124, 58, 237, 0.3);
+  outline: none;
+}
+
+.select-input option {
+  background-color: var(--card-bg);
+  color: var(--text);
+  padding: 0.5rem;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--primary);
+}
+
+.predict-btn {
+  margin-top: 2rem;
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.predict-btn:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.predict-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loading-dots {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}

@@ -1,0 +1,21 @@
+.illustration-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .music-illustration {
+    max-width: 450px;
+    margin-left: 10rem;
+    height: auto;
+    filter: drop-shadow(0 8px 24px rgba(124, 58, 237, 0.2));
+  }
+  
+  @media (max-width: 768px) {
+    .music-illustration {
+      max-width: 300px;
+    }
+  }
+  
+  

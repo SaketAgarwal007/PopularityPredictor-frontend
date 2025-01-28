@@ -1,0 +1,49 @@
+.header {
+  background-color: var(--background);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+  width:100%;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  padding-left:2rem;
+  padding-right: 2rem;
+}
+
+@font-face {
+  font-family:myfont2;
+  src:url(sunshine.otf);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  font-weight: bold;
+  font-size: 1.25rem;
+  font-family:myfont2;
+}
+
+.logo svg {
+  color: var(--primary);
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: var(--primary);
+}
+
