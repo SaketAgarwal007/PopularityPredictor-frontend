@@ -29,6 +29,7 @@ export default function Home() {
   const [genre, setGenre] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [error, setError] = useState("")  // State to store error message
   const navigate = useNavigate()  // For redirecting to Dashboard after success
 
   useEffect(() => {
@@ -54,6 +55,7 @@ export default function Home() {
     if (!file || !genre) return
 
     setIsLoading(true)
+    setError("") // Clear any previous error message
 
     const formData = new FormData()
     formData.append("file", file)
@@ -67,13 +69,14 @@ export default function Home() {
         },
       })
 
+      console.log("Response from backend:", response.data)
       // Assuming the response contains the attributes
-      const { popularity, acousticness, danceability, energy, instrumentalness } = response.data
+      const { predicted_popularity, acousticness, danceability, energy, instrumentalness } = response.data
 
       // Redirect to the Dashboard page and pass the attributes
       navigate("/dashboard", {
         state: {
-          popularity,
+          predicted_popularity,
           acousticness,
           danceability,
           energy,
@@ -83,6 +86,7 @@ export default function Home() {
 
     } catch (error) {
       console.error("Error during prediction:", error)
+      setError("An error occurred. Please try again.") // Set error message state
     } finally {
       setIsLoading(false)
     }
@@ -137,6 +141,8 @@ export default function Home() {
               )}
             </button>
           </form>
+
+          {error && <p className="error-message">{error}</p>} {/* Display error message */}
         </div>
       </div>
       <div className={`illustration-section ${isVisible ? "fade-in-right" : ""}`}>
