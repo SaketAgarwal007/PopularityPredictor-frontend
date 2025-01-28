@@ -10,6 +10,7 @@ export function MusicPlayer({ audioUrl }) {
   const progressRef = useRef(null)
 
   const togglePlay = () => {
+    console.log(audioUrl);  // Debugging toggle play
     if (isPlaying) {
       audioRef.current.pause()
     } else {
@@ -24,6 +25,10 @@ export function MusicPlayer({ audioUrl }) {
 
   const handleLoadedMetadata = () => {
     setDuration(audioRef.current.duration)
+  }
+
+  const handleAudioError = () => {
+    console.error("Error loading audio file");
   }
 
   const handleProgressClick = (e) => {
@@ -44,7 +49,14 @@ export function MusicPlayer({ audioUrl }) {
 
   return (
     <div className="music-player">
-      <audio ref={audioRef} src={audioUrl} onTimeUpdate={handleTimeUpdate} onLoadedMetadata={handleLoadedMetadata} />
+      {/* Audio error handling */}
+      <audio 
+        ref={audioRef} 
+        src={audioUrl} 
+        onTimeUpdate={handleTimeUpdate} 
+        onLoadedMetadata={handleLoadedMetadata} 
+        onError={handleAudioError}  // Handle loading errors
+      />
       <button
         className={`play-button ${isPlaying ? "playing" : ""}`}
         onClick={togglePlay}
@@ -62,4 +74,3 @@ export function MusicPlayer({ audioUrl }) {
     </div>
   )
 }
-

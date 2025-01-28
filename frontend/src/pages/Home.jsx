@@ -71,7 +71,7 @@ export default function Home() {
 
       console.log("Response from backend:", response.data)
       // Assuming the response contains the attributes
-      const { predicted_popularity, acousticness, danceability, energy, instrumentalness } = response.data
+      const { predicted_popularity, acousticness, danceability, energy, instrumentalness, song_url } = response.data
 
       // Redirect to the Dashboard page and pass the attributes
       navigate("/dashboard", {
@@ -81,6 +81,7 @@ export default function Home() {
           danceability,
           energy,
           instrumentalness,
+          song_url
         },
       })
 
