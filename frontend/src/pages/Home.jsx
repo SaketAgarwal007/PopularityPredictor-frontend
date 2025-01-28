@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { Upload, Wand2 } from "lucide-react"
 import { MusicIllustration } from "../components/MusicIllustration"
+import { useNavigate } from "react-router-dom"
+import axiosInstance from "../axiosInstance"  // Correct import for axiosInstance
 import "./Home.css"
 
 const genres = [
@@ -27,6 +29,7 @@ export default function Home() {
   const [genre, setGenre] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const navigate = useNavigate()  // For redirecting to Dashboard after success
 
   useEffect(() => {
     setIsVisible(true)
@@ -51,10 +54,38 @@ export default function Home() {
     if (!file || !genre) return
 
     setIsLoading(true)
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    setIsLoading(false)
 
-    console.log("Submitted:", { file, genre })
+    const formData = new FormData()
+    formData.append("file", file)
+    formData.append("track_genre", genre)
+
+    try {
+      // Use axiosInstance to send the POST request to the /predict endpoint
+      const response = await axiosInstance.post("/predict", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+
+      // Assuming the response contains the attributes
+      const { popularity, acousticness, danceability, energy, instrumentalness } = response.data
+
+      // Redirect to the Dashboard page and pass the attributes
+      navigate("/dashboard", {
+        state: {
+          popularity,
+          acousticness,
+          danceability,
+          energy,
+          instrumentalness,
+        },
+      })
+
+    } catch (error) {
+      console.error("Error during prediction:", error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -114,4 +145,3 @@ export default function Home() {
     </div>
   )
 }
-
