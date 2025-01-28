@@ -5,5 +5,8 @@ export default {
   server: {
     port: 8080,  // Render expects port 8080
     host: '0.0.0.0',  // This ensures that it listens on all network interfaces
-  }
+  },
+  preview: {
+    allowedHosts: ['hitpredict.onrender.com'],  // Add Render domain to allowed hosts
+  },
 }
