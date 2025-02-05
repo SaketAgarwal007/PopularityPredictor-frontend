@@ -60,6 +60,7 @@ export function MusicPlayer({ audioUrl }) {
       <button
         className={`play-button ${isPlaying ? "playing" : ""}`}
         onClick={togglePlay}
+        disabled= {!audioUrl}
         aria-label={isPlaying ? "Pause" : "Play"}
       >
         {isPlaying ? <Pause size={24} /> : <Play size={24} />}
