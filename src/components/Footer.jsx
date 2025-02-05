@@ -33,7 +33,7 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>© 2024 Music Analytics. All rights reserved.</p>
+        <p>© 2025 Music Analytics. All rights reserved.</p>
       </div>
     </footer>
   )
