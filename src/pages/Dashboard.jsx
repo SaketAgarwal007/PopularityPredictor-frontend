@@ -70,7 +70,7 @@ const normalizeTempo = (tempo) => {
     danceability: normalizeFeatures(danceability),
     energy: normalizeFeatures(energy),
     liveness: normalizeFeatures(liveness),
-    tempo: normalizeTempo(tempo || 0),
+    tempo: normalizeTempo(tempo),
     speechiness: normalizeFeatures(speechiness)
   };
 
