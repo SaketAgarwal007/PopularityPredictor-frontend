@@ -7,6 +7,7 @@ import "./Home.css";
 
 const genres = [
   "Acoustic",
+  "Pop",
   "Brazil",
   "British",
   "Cantopop",
@@ -131,7 +132,7 @@ export default function Home() {
                 />
                 <label htmlFor="music-file" className="file-label">
                   <Upload size={20} />
-                  <span>{file ? file.name : "Choose a file"}</span>
+                  <span>{file ? file.name : "  Choose a file"}</span>
                 </label>
               </div>
               <p className="file-hint">Maximum file size: 3MB</p>
